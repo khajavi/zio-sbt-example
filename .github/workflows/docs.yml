@@ -4,6 +4,9 @@ name: docs
 on:
   - release
   - workflow_dispatch
+  push:
+    branches:
+      - main  
 
 jobs:
   publish:
