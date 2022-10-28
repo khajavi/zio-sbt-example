@@ -2,7 +2,9 @@
 name: docs
 
 on:
-  - release
+  push:
+    branches: [main]
+    tags: ["*"]
 
 jobs:
   publish:
