@@ -16,6 +16,10 @@ jobs:
           fetch-depth: 0
       - run: git tag --sort=committerdate | tail -1
       - uses: olafurpg/setup-scala@v13
+      - run: |
+          git clone https://github.com/khajavi/zio-sbt.git
+          cd zio-sbt
+          sbt website/publishLocal
       - run: sbt compileDocs
       - uses: actions/setup-node@v3
         with:
