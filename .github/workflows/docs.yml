@@ -1,7 +1,7 @@
 
 name: docs
 
-on: 
+on:
   - release
   - workflow_dispatch
 
@@ -28,7 +28,7 @@ jobs:
           node-version: '16.x'
           registry-url: 'https://registry.npmjs.org'
       - name: Publishing Docs to NPM Registry
-        run: sbt publishWebsite
+        run: sbt publishToNpm
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
