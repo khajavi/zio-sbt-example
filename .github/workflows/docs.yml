@@ -7,7 +7,7 @@ on:
     branches: [ main ]
     
 jobs:
-  publish:
+  Publish To The NPM Registry:
     runs-on: ubuntu-20.04
     timeout-minutes: 30
     steps:
