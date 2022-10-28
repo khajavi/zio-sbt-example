@@ -1,5 +1,4 @@
-
-name: docs
+name: Documentation
 
 on:
   release:
