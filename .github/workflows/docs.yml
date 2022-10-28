@@ -1,7 +1,8 @@
+name: Publishing The Project's Documentation
 
-name: docs
-
-on: release
+on:
+  release:
+    types: [created]
 
 jobs:
   publish:
