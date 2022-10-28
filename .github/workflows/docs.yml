@@ -1,8 +1,9 @@
-name: Publishing The Project's Documentation
+name: Documentation
 
 on:
-  release:
-    types: [created]
+  - release:
+      types: [created]
+  - workflow_dispatch
 
 jobs:
   publish:
@@ -30,4 +31,3 @@ jobs:
         run: sbt publishToNpm
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-
