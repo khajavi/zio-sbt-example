@@ -21,7 +21,7 @@ jobs:
         run: |
           git clone https://github.com/khajavi/zio-sbt.git
           cd zio-sbt
-          sbt website/publishLocal
+          sbt zio-sbt-website/publishLocal
       - name: Compile Project's Documentation
         run: sbt compileDocs
       - uses: actions/setup-node@v3

@@ -2,7 +2,8 @@ version := "0.0.1"
 organization := "dev.zio"
 name := "zio-sbt-example"
 
-enablePlugins(WebsitePlugin)
+docsDependencies ++= Seq(
+  "dev.zio" %% "zio" % "2.0.2"
+)
 
-//dependsOn(ProjectRef(uri("https://github.com/khajavi/zio-sbt.git"), "website"))
-//addSbtPlugin(WebsitePlugin)
+enablePlugins(WebsitePlugin)
