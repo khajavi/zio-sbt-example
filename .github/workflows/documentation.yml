@@ -5,7 +5,7 @@ on:
     types: [created]
   workflow_dispatch:
     branches: [ main ]
-    
+
 jobs:
   publish-docs:
     runs-on: ubuntu-20.04
@@ -21,7 +21,7 @@ jobs:
         run: |
           git clone https://github.com/khajavi/zio-sbt.git
           cd zio-sbt
-          sbt zio-sbt-website/publishLocal
+          sbt zioSbtWebsite/publishLocal
       - name: Compile Project's Documentation
         run: sbt compileDocs
       - uses: actions/setup-node@v3
@@ -32,4 +32,3 @@ jobs:
         run: sbt publishToNpm
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-
