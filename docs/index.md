@@ -11,3 +11,10 @@ import zio._
 
 val a = 4 * 5
 ```
+
+## Installation
+
+```scala
+// release version
+libraryDependencies += "dev.zio" %% "zio-sbt-example" % "@RELEASE_VERSION@"
+```
