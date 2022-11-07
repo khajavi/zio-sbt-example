@@ -1,6 +1,9 @@
-version := "0.0.1"
+import java.nio.file.Paths
+
 organization := "dev.zio"
 name := "zio-sbt-example"
+
+websiteDir := Paths.get("./")
 
 docsDependencies ++= Seq(
   "dev.zio" %% "zio" % "2.0.2"
