@@ -7,8 +7,6 @@ name: website
 on:
   release:
     types: [ published ]
-  workflow_dispatch:
-    branches: [ main ]
 
 jobs:
   publish-docs:
@@ -22,13 +20,11 @@ jobs:
         run: git tag --sort=committerdate | tail -1
       - name: Setup Scala and Java
         uses: olafurpg/setup-scala@v13
-      - name: Compile Project's Documentation
-        run: sbt compileDocs
       - uses: actions/setup-node@v3
         with:
           node-version: '16.x'
           registry-url: 'https://registry.npmjs.org'
       - name: Publishing Docs to NPM Registry
         run: sbt publishToNpm
-        env:
+        env: 
           NODE_AUTH_TOKEN: ${secrets.NPM_TOKEN}
