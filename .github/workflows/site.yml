@@ -82,6 +82,7 @@ jobs:
           name: website-artifact
      
       - run: ls -R 
+      - run: echo ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.production }}
     
       - name: Release to GitHub Pages
         if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/docs.')  || ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.production }}
