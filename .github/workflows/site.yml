@@ -84,7 +84,7 @@ jobs:
       - run: ls -R 
     
       - name: Release to GitHub Pages
-        if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/docs.') || github.event_name == 'workflow_dispatch' && ${{ github.event.inputs.production }}
+        if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/docs.') # || github.event_name == 'workflow_dispatch' && ${{ github.event.inputs.production }}
         uses: JamesIves/github-pages-deploy-action@v4.4.1
         with:
           branch: gh-pages
