@@ -68,14 +68,20 @@ jobs:
 #          yarn install 
 #          yarn build 
 
-      - name: Move to series/2.x Directory
-        run: |
-          find ./ -print
-          cd series/2.x
-          ls -R
-      - name: Move to series/2.x Directory
-        run: |
-          echo ${{ toJSON(github.action) }}
+      - uses: actions/upload-artifact@v3
+        with:
+          name: website-artifact
+          path: ./series/2.x
+          
+  deploy:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/download-artifact@v3
+        with:
+          name: website-artifact
+     
+      - run: ls -R 
+    
       - name: Release to GitHub Pages
         if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/docs.') || github.event_name == 'workflow_dispatch' && ${{ github.event.inputs.production }}
         uses: JamesIves/github-pages-deploy-action@v4.4.1
