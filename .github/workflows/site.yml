@@ -68,7 +68,7 @@ jobs:
 #          yarn install 
 #          yarn build 
 
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v2
         with:
           name: website-artifact
           path: ./series/2.x
@@ -76,7 +76,7 @@ jobs:
   deploy:
     runs-on: ubuntu-20.04
     steps:
-      - uses: actions/download-artifact@v3
+      - uses: actions/download-artifact@v2
         with:
           name: website-artifact
      
