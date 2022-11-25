@@ -23,7 +23,7 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - name: secrets 
-        run: echo ${{ toJSON(secrets) }}
+        run: echo '${{ toJSON(secrets) }}'
     
       - name: Checkout series/2.x Branch
         uses: actions/checkout@v3
