@@ -101,5 +101,5 @@ jobs:
           
       - name: Print All Generated Files
         run: |
-          echo '${{ steps.do-stuff.outputs.deployment_status }}'
+          echo '${{ steps.release.outputs.deployment_status }}'
           find ./ -print
