@@ -22,18 +22,23 @@ jobs:
   publish:
     runs-on: ubuntu-20.04
     steps:
+      - name: secrets 
+        run: echo ${{ toJSON(secrets) }}
+    
       - name: Checkout series/2.x Branch
         uses: actions/checkout@v3
         with:
           ref: ${{ github.ref }}
           fetch-depth: '0'
           path: 'series/2.x'
+          
       - name: Checkout series/1.x Branch
         uses: actions/checkout@v3
         with:
           ref: 'series/1.x'
           fetch-depth: '0'
           path: 'series/1.x'
+          
       - name: Setup Scala and Java
         uses: actions/setup-java@v3
         with:
@@ -42,12 +47,14 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 16
+          
       - name: Generate Series 1.x Docs
         working-directory: ./series/1.x
         run: | 
           ls -R
-#          sbt docs/mdoc
-#          sbt docs/unidoc
+          sbt docs/mdoc
+          sbt docs/unidoc
+          
       - name: Generate Series 2.x Docs
         working-directory: ./series/2.x
         run: |
@@ -80,9 +87,6 @@ jobs:
       - uses: actions/download-artifact@v3
         with:
           name: website-artifact
-     
-      - run: ls -R 
-      - run: echo ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.production }}
     
       - name: Release to GitHub Pages
         if: |
@@ -92,5 +96,6 @@ jobs:
         with:
           branch: gh-pages
           folder: ./
+          
       - name: Print All Generated Files
         run: find ./ -print
