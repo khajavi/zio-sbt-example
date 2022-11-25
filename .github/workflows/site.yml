@@ -59,6 +59,9 @@ jobs:
         working-directory: ./series/2.x
         run: |
            ls -R
+           mkdir target
+           touch target/hello.md
+           touch target/index.html
 #          sbt docs/mdoc
 #          sbt docs/unidoc
 #      - name: Move Series 1.x Docs To 2.x Docs
@@ -67,7 +70,7 @@ jobs:
 #          mkdir -p ./series/2.x/website/versioned_docs/version-1.x
 #          mv ./series/1.x/zio-docs/target/mdoc/* ./series/2.x/website/versioned_docs/version-1.x
 #          mkdir -p ./series/2.x/website/static/api/1.x
-#          mv website/static/api ./series/2.x/website/static/api-1.x
+#ci.yml          mv website/static/api ./series/2.x/website/static/api-1.x
 #      - name: Install The Whole Website
 #        working-directory: ./series/2.x/website
 #        run: |
@@ -78,15 +81,21 @@ jobs:
       - uses: actions/upload-artifact@v3
         with:
           name: website-artifact
-          path: ./series/2.x
+          path: ./series/2.x/target
           
   deploy:
     needs: [publish]
     runs-on: ubuntu-20.04
     steps:
+      - name: Checkout series/1.x Branch
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+        
       - uses: actions/download-artifact@v3
         with:
           name: website-artifact
+          path: website-artifact
     
       - name: Release to GitHub Pages
         id: release
@@ -96,7 +105,7 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@v4.4.1
         with:
           branch: gh-pages
-          folder: ./
+          folder: ./website-artifact
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           
       - name: Print All Generated Files
