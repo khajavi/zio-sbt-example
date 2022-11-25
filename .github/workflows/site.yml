@@ -52,8 +52,8 @@ jobs:
         working-directory: ./series/1.x
         run: | 
           ls -R
-          sbt docs/mdoc
-          sbt docs/unidoc
+#          sbt docs/mdoc
+#          sbt docs/unidoc
           
       - name: Generate Series 2.x Docs
         working-directory: ./series/2.x
