@@ -89,6 +89,7 @@ jobs:
           name: website-artifact
     
       - name: Release to GitHub Pages
+        id: release
         if: |
           (github.event_name == 'push' && startsWith(github.ref, 'refs/tags/docs.')) || 
             (github.event_name == 'workflow_dispatch' && github.event.inputs.production)
@@ -96,6 +97,9 @@ jobs:
         with:
           branch: gh-pages
           folder: ./
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           
       - name: Print All Generated Files
-        run: find ./ -print
+        run: |
+          echo '${{ steps.do-stuff.outputs.deployment_status }}'
+          find ./ -print
